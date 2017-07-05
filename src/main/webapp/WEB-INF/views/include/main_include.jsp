@@ -237,9 +237,43 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/resources/bootstrap/js/bootstrap.min.js"></script>
-
-
+    
+    <script>
+	$("#id").keyup(function(event){
+		var id = $("#id").val();
+		$.ajax({
+			url : "/idCheckAjax",
+			type: "get",
+			data : {"id" : id},
+			success : function(responseData){
+				var data = responseData;
+				var str = "";
+				
+				if(data == 1){
+					str = "ID는 5글자 이상이어야 합니다.";
+				}
+				else if(data == 2){
+					str = "ID가 중복됩니다.";
+				}
+				else{
+					str = "사용가능한 아이디 입니다."
+				}
+				$("#str").empty();
+				$("#str").append(str);
+			}
+		})
+	});
+</script>
+<script>
+if('${param.msg}' == 'ok'){
+	alert('회원가입 성공');
+	location.href = "/";
+}
+else if('${param.msg}' == 'err'){
+	alert('회원가입 실패');
+	location.href = "/";
+}
+</script>
 </body>
-
 </html>
     

@@ -21,5 +21,23 @@ public class userDAOImple implements userDAO{
 	public List<userVO> selectAll() throws Exception {
 		return session.selectList(namespace+".selectAll");
 	}
+
+	@Override
+	public Integer idCheck(userVO vo) throws Exception {
+		return session.selectOne(namespace+".idCheck", vo);
+	}
+
+	@Override
+	public boolean regist(userVO vo) {
+		try{
+			session.insert(namespace+".regist", vo);
+			return true;
+		}
+		catch(Exception ex){
+			return false;
+		}
+		
+	}
+	
 	
 }

@@ -13,4 +13,10 @@
 		from users
 		where id = #{id}
 	</select>
+	
+	<insert id="regist">
+		insert into users(id,pwd,name,email)
+		values(#{id},#{pwd},#{name},#{email})
+	</insert>
+	
 </mapper>

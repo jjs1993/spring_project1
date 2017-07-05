@@ -20,4 +20,16 @@ public class userServiceImple implements userService {
 		return dao.selectAll();
 	}
 
+	@Override
+	public Integer idCheck(String id) throws Exception {
+		userVO vo = new userVO();
+		vo.setId(id);
+		return dao.idCheck(vo);
+	}
+
+	@Override
+	public boolean regist(userVO vo)throws Exception{
+		return dao.regist(vo);
+	}
+
 }

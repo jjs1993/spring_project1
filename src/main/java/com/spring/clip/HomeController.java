@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,8 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home()throws Exception{
 		
@@ -42,9 +45,31 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = "/idCheckAjax", method = RequestMethod.GET)
-	public @ResponseBody  String idAjax(@RequestParam("id") String id)throws Exception{
-
-		return null;
+	public void idAjax(@RequestParam("id") String id, HttpServletResponse response)throws Exception{
+		
+		Integer check= null;
+		int flag = 0;
+		
+		if(id.length()<5){
+			flag = 1;
+		}
+		else{
+			check = user_Service.idCheck(id);
+			
+			if(check > 0)
+				flag = 2;
+			
+		}
+		
+		response.getWriter().println(flag);
+	}
+	
+	@RequestMapping(value="/Regist",method=RequestMethod.POST)
+	public String Regist(userVO vo)throws Exception{
+		if(user_Service.regist(vo))
+		 return "redirect:/?msg=ok";
+		
+		return "redirect:/?msg=err";
 	}
 	
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0/EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.InformationMapper">
+	<insert id="Insert">
+		Insert into
+		information(i_url,i_inform,i_link,i_index,i_name)
+		values(#{i_url},#{i_inform},#{i_link},#{i_index},#{i_name})
+	</insert>
+	
+	<update id="Update">
+		update information
+		set i_url = #{i_url}
+		,i_inform = #{i_inform}
+		,i_link = #{i_link}
+		,i_name = #{i_name}
+		where i_index = #{i_index}
+	</update>
+	
+	<select id="selectAll" resultType="informationVO">
+		select *
+		from information
+	</select>
+</mapper>	
